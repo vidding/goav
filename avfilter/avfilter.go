@@ -43,9 +43,9 @@ func AvfilterLicense() string {
 }
 
 //Get the number of elements in a NULL-terminated array of Pads (e.g.
-func AvfilterPadCount(p *Pad) int {
-	return int(C.avfilter_pad_count((*C.struct_AVFilterPad)(p)))
-}
+// func AvfilterPadCount(p *Pad) int {
+// 	return int(C.avfilter_pad_count((*C.struct_AVFilterPad)(p)))
+// }
 
 //Get the name of an Pad.
 func AvfilterPadGetName(p *Pad, pi int) string {
@@ -68,14 +68,14 @@ func AvfilterLinkFree(l **Link) {
 }
 
 //Get the number of channels of a link.
-func AvfilterLinkGetChannels(l *Link) int {
-	return int(C.avfilter_link_get_channels((*C.struct_AVFilterLink)(l)))
-}
+// func AvfilterLinkGetChannels(l *Link) int {
+// 	return int(C.avfilter_link_get_channels((*C.struct_AVFilterLink)(l)))
+// }
 
 //Set the closed field of a link.
-func AvfilterLinkSetClosed(l *Link, c int) {
-	C.avfilter_link_set_closed((*C.struct_AVFilterLink)(l), C.int(c))
-}
+// func AvfilterLinkSetClosed(l *Link, c int) {
+// 	C.avfilter_link_set_closed((*C.struct_AVFilterLink)(l), C.int(c))
+// }
 
 //Negotiate the media format, dimensions, etc of all inputs to a filter.
 func AvfilterConfigLinks(f *Context) int {
@@ -88,9 +88,9 @@ func AvfilterProcessCommand(f *Context, cmd, arg, res string, l, fl int) int {
 }
 
 //Initialize the filter system.
-func AvfilterRegisterAll() {
-	C.avfilter_register_all()
-}
+// func AvfilterRegisterAll() {
+// 	C.avfilter_register_all()
+// }
 
 //Initialize a filter with the supplied parameters.
 func (ctx *Context) AvfilterInitStr(args string) int {

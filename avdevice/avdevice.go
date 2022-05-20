@@ -60,14 +60,14 @@ func AvdeviceDevToAppControlMessage(fcxt *AvFormatContext, m AvDevToAppMessageTy
 }
 
 //Initialize capabilities probing API based on AvOption API.
-func AvdeviceCapabilitiesCreate(c **AvDeviceCapabilitiesQuery, s *AvFormatContext, d **Dictionary) int {
-	return int(C.avdevice_capabilities_create((**C.struct_AVDeviceCapabilitiesQuery)(unsafe.Pointer(c)), (*C.struct_AVFormatContext)(s), (**C.struct_AVDictionary)(unsafe.Pointer(d))))
-}
+// func AvdeviceCapabilitiesCreate(c **AvDeviceCapabilitiesQuery, s *AvFormatContext, d **Dictionary) int {
+// 	return int(C.avdevice_capabilities_create((**C.struct_AVDeviceCapabilitiesQuery)(unsafe.Pointer(c)), (*C.struct_AVFormatContext)(s), (**C.struct_AVDictionary)(unsafe.Pointer(d))))
+// }
 
 //Free resources created by avdevice_capabilities_create()
-func AvdeviceCapabilitiesFree(c **AvDeviceCapabilitiesQuery, s *AvFormatContext) {
-	C.avdevice_capabilities_free((**C.struct_AVDeviceCapabilitiesQuery)(unsafe.Pointer(c)), (*C.struct_AVFormatContext)(s))
-}
+// func AvdeviceCapabilitiesFree(c **AvDeviceCapabilitiesQuery, s *AvFormatContext) {
+// 	C.avdevice_capabilities_free((**C.struct_AVDeviceCapabilitiesQuery)(unsafe.Pointer(c)), (*C.struct_AVFormatContext)(s))
+// }
 
 //List devices.
 func AvdeviceListDevices(s *AvFormatContext, d **AvDeviceInfoList) int {

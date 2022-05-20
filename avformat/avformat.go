@@ -70,23 +70,23 @@ func (ctxt *AvIOContext) Close() error {
 	return avutil.ErrorFromCode(int(C.avio_close((*C.AVIOContext)(unsafe.Pointer(ctxt)))))
 }
 
-func (f *InputFormat) AvRegisterInputFormat() {
-	C.av_register_input_format((*C.struct_AVInputFormat)(f))
-}
+// func (f *InputFormat) AvRegisterInputFormat() {
+// 	C.av_register_input_format((*C.struct_AVInputFormat)(f))
+// }
 
-func (f *OutputFormat) AvRegisterOutputFormat() {
-	C.av_register_output_format((*C.struct_AVOutputFormat)(f))
-}
+// func (f *OutputFormat) AvRegisterOutputFormat() {
+// 	C.av_register_output_format((*C.struct_AVOutputFormat)(f))
+// }
 
 //If f is NULL, returns the first registered input format, if f is non-NULL, returns the next registered input format after f or NULL if f is the last one.
-func (f *InputFormat) AvIformatNext() *InputFormat {
-	return (*InputFormat)(C.av_iformat_next((*C.struct_AVInputFormat)(f)))
-}
+// func (f *InputFormat) AvIformatNext() *InputFormat {
+// 	return (*InputFormat)(C.av_iformat_next((*C.struct_AVInputFormat)(f)))
+// }
 
 //If f is NULL, returns the first registered output format, if f is non-NULL, returns the next registered output format after f or NULL if f is the last one.
-func (f *OutputFormat) AvOformatNext() *OutputFormat {
-	return (*OutputFormat)(C.av_oformat_next((*C.struct_AVOutputFormat)(f)))
-}
+// func (f *OutputFormat) AvOformatNext() *OutputFormat {
+// 	return (*OutputFormat)(C.av_oformat_next((*C.struct_AVOutputFormat)(f)))
+// }
 
 //Return the LIBAvFORMAT_VERSION_INT constant.
 func AvformatVersion() uint {
@@ -104,9 +104,9 @@ func AvformatLicense() string {
 }
 
 //Initialize libavformat and register all the muxers, demuxers and protocols.
-func AvRegisterAll() {
-	C.av_register_all()
-}
+// func AvRegisterAll() {
+// 	C.av_register_all()
+// }
 
 //Do global initialization of network components.
 func AvformatNetworkInit() int {
@@ -130,7 +130,7 @@ func AvformatGetClass() *Class {
 
 //Get side information from stream.
 func (s *Stream) AvStreamGetSideData(t AvPacketSideDataType, z int) *uint8 {
-	return (*uint8)(C.av_stream_get_side_data((*C.struct_AVStream)(s), (C.enum_AVPacketSideDataType)(t), (*C.int)(unsafe.Pointer(&z))))
+	return (*uint8)(C.av_stream_get_side_data((*C.struct_AVStream)(s), (C.enum_AVPacketSideDataType)(t), (*C.ulonglong)(unsafe.Pointer(&z))))
 }
 
 //Allocate an Context for an output format.
@@ -267,16 +267,16 @@ func AvAddIndexEntry(st *Stream, pos, t, int64, s, d, f int) int {
 
 //Split a URL string into components.
 func AvUrlSplit(proto_size, authorization_size, hostname_size int, pp *int, path_size int, url string) (proto, authorization, hostname, path string) {
-	Cproto := (*C.char)(C.malloc(C.sizeof_char * C.ulong(proto_size)))
+	Cproto := (*C.char)(C.malloc(C.sizeof_char * C.ulonglong(proto_size)))
 	defer C.free(unsafe.Pointer(Cproto))
 
-	Cauthorization := (*C.char)(C.malloc(C.sizeof_char * C.ulong(authorization_size)))
+	Cauthorization := (*C.char)(C.malloc(C.sizeof_char * C.ulonglong(authorization_size)))
 	defer C.free(unsafe.Pointer(Cauthorization))
 
-	Chostname := (*C.char)(C.malloc(C.sizeof_char * C.ulong(hostname_size)))
+	Chostname := (*C.char)(C.malloc(C.sizeof_char * C.ulonglong(hostname_size)))
 	defer C.free(unsafe.Pointer(Chostname))
 
-	Cpath := (*C.char)(C.malloc(C.sizeof_char * C.ulong(path_size)))
+	Cpath := (*C.char)(C.malloc(C.sizeof_char * C.ulonglong(path_size)))
 	defer C.free(unsafe.Pointer(Cpath))
 
 	Curl := C.CString(url)
@@ -297,7 +297,7 @@ func AvUrlSplit(proto_size, authorization_size, hostname_size int, pp *int, path
 //int av_get_frame_filename (char *buf, int buf_size, const char *path, int number)
 //Return in 'buf' the path with 'd' replaced by a number.
 func AvGetFrameFilename(buf_size int, path string, number int) (int, string) {
-	Cbuf := (*C.char)(C.malloc(C.sizeof_char * C.ulong(buf_size)))
+	Cbuf := (*C.char)(C.malloc(C.sizeof_char * C.ulonglong(buf_size)))
 	defer C.free(unsafe.Pointer(Cbuf))
 
 	Cpath := C.CString(path)
@@ -318,7 +318,7 @@ func AvFilenameNumberTest(filename string) int {
 
 //Generate an SDP for an RTP session.
 func AvSdpCreate(ac **Context, n_files int, buf_size int) (int, string) {
-	Cbuf := (*C.char)(C.malloc(C.sizeof_char * C.ulong(buf_size)))
+	Cbuf := (*C.char)(C.malloc(C.sizeof_char * C.ulonglong(buf_size)))
 	defer C.free(unsafe.Pointer(Cbuf))
 
 	ret := int(C.av_sdp_create((**C.struct_AVFormatContext)(unsafe.Pointer(ac)), C.int(n_files), Cbuf, C.int(buf_size)))
