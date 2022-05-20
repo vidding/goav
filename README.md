@@ -1,6 +1,4 @@
-# Deprecation Notice
-
-This repository is no longer maintained.
+# Support FFMPEG 5.0 "Lorentz"
 
 # goav
 Golang binding for FFmpeg
